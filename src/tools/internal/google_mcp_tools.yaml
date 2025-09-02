@@ -1,0 +1,29 @@
+sources:
+  my-redis-source:
+    kind: redis
+    address:
+      - 127.0.0.1:6379
+    database: 0
+
+tools:
+  manage-users:
+    kind: redis
+    source: my-redis-source
+    description: |
+      Use this tool to interact with user data stored in Redis.
+      It can set, retrieve, and delete user-specific information.
+    parameters:
+      - name: userId
+        type: string
+        description: The unique identifier for the user.
+      - name: userName
+        type: string
+        description: The user name to be set.
+    commands:
+      - [SET, $userId, $userName]
+      - [GET, $userId]
+      - [DEL, $userId]
+
+toolsets:
+  my-toolset:
+    - manage-users

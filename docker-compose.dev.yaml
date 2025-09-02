@@ -1,0 +1,18 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+  redis-insights:
+    image: redis/redisinsight:latest
+    container_name: redis-insights
+    ports:
+      - 5540:5540
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
